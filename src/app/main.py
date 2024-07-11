@@ -1,5 +1,5 @@
-import datetime
 from dataclasses import dataclass
+from datetime import datetime
 from enum import Enum
 
 
@@ -17,7 +17,7 @@ class Transaction:
     user_id: int
     transaction_sum: float
     transaction_type: TransactionType
-    creation_time: datetime.datetime = datetime.datetime.now()
+    creation_time: datetime = datetime.now()
 
 
 class TransactionService:
@@ -27,7 +27,9 @@ class TransactionService:
     reports: list = []
 
     @classmethod
-    def create_transaction(cls, user_id, transaction_sum, transaction_type):
+    def create_transaction(
+        cls, user_id: int, transaction_sum: float, transaction_type: TransactionType,
+    ) -> Transaction:
         """Создать транзакции."""
         transaction = Transaction(user_id, transaction_sum, transaction_type)
 
@@ -37,7 +39,9 @@ class TransactionService:
         return transaction
 
     @classmethod
-    def get_transaction(cls, user_id, start_date, end_date):
+    def get_transaction(
+        cls, user_id: int, start_date: datetime, end_date: datetime,
+    ) -> list[Transaction]:
         """Получить тарнзакцию."""
         if user_id not in cls.transactions:
             return []
