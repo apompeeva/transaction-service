@@ -22,5 +22,5 @@ Linter:
 Tests:
   stage: test
   script:
-    - pytest src/tests
+    - poetry run pytest src/tests
 
