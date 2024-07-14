@@ -3,7 +3,7 @@ default:
   before_script:
     - curl -sSL https://install.python-poetry.org | python3 - --git https://github.com/python-poetry/poetry.git@main
     - export PATH="$HOME/.local/bin:$PATH"
-    - poetry install --no-root
+    - poetry install
 
 stages:
   - tests
@@ -23,8 +23,7 @@ Linter:
 Tests:
   stage: tests
   script:
-    - cd src
-    - poetry run pytest
+    - python -m pytest src
   artifacts:
         name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
         paths:
