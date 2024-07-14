@@ -22,8 +22,8 @@ Linter:
 Tests:
   stage: test
   script:
-    - cd /workspace
-    - poetry run pytest src/tests
+    - cd /src
+    - poetry run pytest tests
   artifacts:
         name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
         paths:
