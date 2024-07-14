@@ -6,7 +6,7 @@ default:
     - poetry install --no-root
 
 stages:
-  - test
+  - tests
 
 MyPy:
   stage: lint
@@ -19,9 +19,9 @@ Linter:
     - poetry run flake8 --config setup.cfg src/app
 
 Tests:
-  stage: test
+  stage: tests
   script:
-    - python3 -m pytest src/tests
+    - poetry run pytest src/tests
   artifacts:
         name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
         paths:
