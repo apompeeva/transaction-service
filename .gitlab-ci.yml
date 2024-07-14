@@ -23,7 +23,7 @@ Linter:
 Tests:
   stage: tests
   script:
-    -cd src
+    - cd src
     - poetry run pytest
   artifacts:
         name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
