@@ -3,7 +3,7 @@ from datetime import datetime
 import pytest
 from freezegun import freeze_time
 
-from src.app.main import Transaction, TransactionService, TransactionType
+from .app.main import Transaction, TransactionService, TransactionType
 
 
 @freeze_time('2024-07-12 03:21:34')
