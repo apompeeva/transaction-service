@@ -22,12 +22,11 @@ Linter:
 Tests:
   stage: test
   script:
-    - cd /src
-    - poetry run pytest tests
+    - python -m pytest src/tests
   artifacts:
         name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
         paths:
-            - /workspace/coverage/
+            - coverage/
         when: on_success
         expire_in: 1 week
   coverage: '/TOTAL.*\s+(\d+%)$/'
