@@ -28,7 +28,7 @@ def test_create_transaction(transaction_service, user_id, transaction_sum, trans
     pytest.param(1, datetime(2024, 5, 10), datetime(
         2024, 5, 14), id='no_transaction_in_range'),
 ))
-def test_get_transaction_no_tranzactions(transaction_service, user_id, start_date, end_date):
+def test_get_transaction_no_transactions(transaction_service, user_id, start_date, end_date):
     transactions = transaction_service.get_transaction(
         user_id, start_date, end_date)
 

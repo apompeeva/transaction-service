@@ -17,7 +17,7 @@ MyPy:
 Linter:
   stage: lint
   script:
-    - poetry run flake8 --config setup.cfg
+    - poetry run flake8 --config setup.cfg src/app
 
 Tests:
   stage: test
