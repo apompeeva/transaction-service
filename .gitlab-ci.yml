@@ -6,6 +6,7 @@ default:
     - poetry install --no-root
 
 stages:
+  - lint
   - tests
 
 MyPy:
