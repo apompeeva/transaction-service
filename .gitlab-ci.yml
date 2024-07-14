@@ -24,7 +24,7 @@ Tests:
   stage: tests
   script:
     - echo "$PWD"
-    - echo "$PYTHON_PATH"
+    - export PYTHON_PATH="$PWD/src"
     - poetry run pytest src
   artifacts:
         name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
