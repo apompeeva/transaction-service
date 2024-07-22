@@ -1,5 +1,5 @@
 {
-    "name": "transaction-service",
+    "name": "transaction-service-pompeeva",
     "dockerComposeFile": "docker-compose.yml",
     "service": "app",
     "workspaceFolder": "/workspace",
