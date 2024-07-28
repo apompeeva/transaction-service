@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 from app.schemas.schemas import Transaction, ReportData
 from app.core.service import TransactionService
 
@@ -14,7 +14,7 @@ async def create_transaction(transaction: Transaction):
                             detail="User not verified")
 
 
-@transaction_router.get("/get_report", status_code=status.HTTP_200_OK)
+@transaction_router.post("/get_report", status_code=status.HTTP_200_OK)
 async def get_report(data: ReportData):
     report = TransactionService.get_transaction(
         data.user_id, data.start_date, data.end_date)
