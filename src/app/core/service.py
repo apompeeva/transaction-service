@@ -36,9 +36,9 @@ class TransactionService:
         user = cls.users.get_user(transaction.user_id)
         balance = user.balance
         match transaction.transaction_type:
-            case TransactionType.withdrawal:
+            case TransactionType.withdrawal.value:
                 balance -= transaction.transaction_sum
-            case TransactionType.deposit:
+            case TransactionType.deposit.value:
                 balance += transaction.transaction_sum
         return balance
 
@@ -63,7 +63,7 @@ class TransactionService:
         """Создать транзакции."""
         transaction = Transaction(user_id, transaction_sum, transaction_type)
         new_balance = cls.calculate_balance_after_transaction(transaction)
-        if new_balance > 0:
+        if new_balance >= 0:
             cls.put_transaction_in_storage(transaction)
         else:
             if cls.users.get_user(user_id).is_verified():

@@ -13,4 +13,8 @@ def transaction_service():
     transaction = Transaction(
         1, 100, TransactionType.withdrawal, datetime.now())
     transaction_service.transactions[1] = [transaction]
+    transaction_service.users.add_user(1, False)
+    transaction_service.users.add_user(2, True)
+    transaction_service.users.add_user(3, True)
+    transaction_service.users.add_user(4, True)
     return transaction_service

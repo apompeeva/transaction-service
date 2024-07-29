@@ -29,9 +29,9 @@ class UserStorage():
 
     _storage: dict[int, User] = {}
 
-    def add_user(self, user_id):
+    def add_user(self, user_id: int, verified: bool = False):
         """Добавить пользователя в хранилище."""
-        self._storage.update({user_id: User(user_id)})
+        self._storage.update({user_id: User(user_id, verified)})
 
     def get_user(self, user_id: int) -> User:
         """Получить данные пользователя из хранилища."""
