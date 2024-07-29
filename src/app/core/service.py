@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from enum import Enum
-from app.core.user_storage import UserStorage
 from decimal import Decimal
+from enum import Enum
+
+from app.core.user_storage import UserStorage
 
 
 class TransactionType(Enum):
@@ -31,6 +32,7 @@ class TransactionService:
 
     @classmethod
     def calculate_balance_after_transaction(cls, transaction: Transaction) -> Decimal:
+        """Рассчитать баланс после транзакции."""
         user = cls.users.get_user(transaction.user_id)
         balance = user.balance
         match transaction.transaction_type:
@@ -42,19 +44,21 @@ class TransactionService:
 
     @classmethod
     def put_transaction_in_storage(cls, transaction: Transaction):
+        """Записать транзакцию в хранилище."""
         if transaction.user_id not in cls.transactions:
             cls.transactions[transaction.user_id] = []
         cls.transactions[transaction.user_id].append(transaction)
 
     @classmethod
     def update_balance(cls, user_id: int, new_balance: Decimal):
+        """Обновить баланс."""
         user = cls.users.get_user(user_id)
         user.update_balance(new_balance)
         cls.users.update_user(user)
 
     @classmethod
     def create_transaction(
-        cls, user_id: int, transaction_sum: float, transaction_type: TransactionType,
+        cls, user_id: int, transaction_sum: Decimal, transaction_type: TransactionType,
     ) -> Transaction | None:
         """Создать транзакции."""
         transaction = Transaction(user_id, transaction_sum, transaction_type)

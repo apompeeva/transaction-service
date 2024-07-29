@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from app.endpoints.endpoints import transaction_router
 
+from app.endpoints.endpoints import transaction_router
 
 app = FastAPI()
 
-app.include_router(transaction_router, tags=["transaction"])
+app.include_router(transaction_router, tags=['transaction'])
