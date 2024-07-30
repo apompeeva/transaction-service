@@ -1,16 +1,16 @@
 from datetime import datetime
+from decimal import Decimal
 
 import pytest
 from freezegun import freeze_time
-from decimal import Decimal
 
 
 @pytest.mark.parametrize('user_id, transaction_sum, transaction_type', (
     pytest.param(1, 100.0, 2, id='not_verified_user_deposit'),
-    pytest.param(1, 10.0, 2, id='not_verified_user_withdraval'),
+    pytest.param(1, 10.0, 1, id='not_verified_user_withdraval'),
     pytest.param(2, 100.0, 2, id='verified_user_deposit'),
-    pytest.param(2, 100.0, 2, id='verified_user_withdraval'),
-    pytest.param(3, 100.0, 2, id='verified_user_extra_withdraval'),
+    pytest.param(2, 100.0, 1, id='verified_user_withdraval'),
+    pytest.param(3, 100.0, 1, id='verified_user_extra_withdraval'),
 ))
 @freeze_time('2024-07-11 03:21:34')
 def test_create_transaction(transaction_service, user_id, transaction_sum, transaction_type):

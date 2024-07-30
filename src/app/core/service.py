@@ -22,6 +22,10 @@ class Transaction:
     transaction_type: TransactionType
     creation_time: datetime = field(default_factory=lambda: datetime.now())
 
+    def __post_init__(self):
+        """Приводим сумму транзакции к типу Decimal."""
+        self.transaction_sum = Decimal(self.transaction_sum)
+
 
 class TransactionService:
     """Cервис обработки транзакций пользователя."""
