@@ -27,3 +27,8 @@ async def get_report(report_data: ReportData):
         report_data.start_date,
         report_data.end_date,
     )
+
+
+@transaction_router.get('/healthz/ready', status_code=status.HTTP_200_OK)
+async def health_check():
+    pass
