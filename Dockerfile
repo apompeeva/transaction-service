@@ -4,7 +4,7 @@ WORKDIR /transaction
 
 ENV POETRY_VERSION=1.8.3
 
-RUN apt-get update && apt_get upgrade pip && pip install "poetry==${POETRY_VERSION}"
+RUN apt-get update && apt-get -y upgrade && pip install "poetry==${POETRY_VERSION}"
 COPY poetry.lock pyproject.toml ./
 
 RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
