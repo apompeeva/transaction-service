@@ -31,4 +31,5 @@ async def get_report(report_data: ReportData):
 
 @transaction_router.get('/healthz/ready', status_code=status.HTTP_200_OK)
 async def health_check():
-    pass
+    '''Проверка работоспособности сервиса.'''
+    return 'Ok'
