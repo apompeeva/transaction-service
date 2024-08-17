@@ -30,6 +30,15 @@ Table transactions {
   color varchar
  }
 
+ Table face_vectors {
+  id bigserial
+  user_id bigint
+  embedding varchar(1000)
+  path_to_image varchar
+  creation_time timestamp
+}
+
 Ref: transactions.account_id > accounts.id
 Ref: accounts.user_id > users.id
 Ref: transactions.label <> labels.id
+Ref: face_vectors.user_id - users.id

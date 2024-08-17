@@ -3,20 +3,30 @@
 
 
 Table users {
-  id integer [primary key]
+  id bigserial [primary key]
   login varchar
   password varchar
-  balance integer
+  balance bigint
   verified bool
 }
 
 Table transactions {
-  id integer [primary key]
-  user_id integer
+  id bigserial [primary key]
+  user_id bigint
   type varchar
-  amount integer
+  amount bigint
   created_at timestamp
 }
 
-Ref: transactions.user_id > users.id // many-to-one
+Table face_vectors {
+  id bigserial
+  user_id bigint
+  embedding varchar(1000)
+  path_to_image varchar
+  creation_time timestamp
+}
+
+Ref: transactions.user_id > users.id
+Ref: face_vectors.user_id - users.id
+
 
