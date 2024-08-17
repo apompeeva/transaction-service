@@ -1,0 +1,35 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table users {
+  id bigserial [primary key]
+  login varchar
+  password varchar
+  verified bool
+}
+
+Table accounts {
+  id bigserial
+  user_id bigint
+  balance bigint
+}
+
+Table transactions {
+  id bigserial [primary key]
+  account_id bigint
+  type varchar
+  amount bigint
+  created_at timestamp
+  label varchar
+}
+
+ Table labels {
+  id bigserial
+  name varchar
+  description varchar
+  color varchar
+ }
+
+Ref: transactions.account_id > accounts.id
+Ref: accounts.user_id > users.id
+Ref: transactions.label <> labels.id

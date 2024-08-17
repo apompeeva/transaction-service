@@ -1,0 +1,22 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+
+Table users {
+  id integer [primary key]
+  login varchar
+  password varchar
+  balance integer
+  verified bool
+}
+
+Table transactions {
+  id integer [primary key]
+  user_id integer
+  type varchar
+  amount integer
+  created_at timestamp
+}
+
+Ref: transactions.user_id > users.id // many-to-one
+
