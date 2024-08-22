@@ -75,8 +75,8 @@ class TransactionService:
     ) -> Transaction | None:   # type: ignore
         """Создать транзакции."""
         transaction = Transaction(
-            user_id, transaction_sum, transaction_type.value,
-        )  # type: ignore
+            user_id, transaction_sum, transaction_type.value,  # type: ignore
+        )
         new_balance = await cls.calculate_balance_after_transaction(transaction)
         if new_balance >= 0:
             await cls.put_transaction_in_storage(transaction)
