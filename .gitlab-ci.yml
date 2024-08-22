@@ -13,6 +13,7 @@ stages:
 MyPy:
   stage: lint
   script:
+    - mypy --install-types
     - poetry run mypy --config-file setup.cfg
   rules:
     - changes:
