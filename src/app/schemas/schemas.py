@@ -1,14 +1,14 @@
 from datetime import datetime
-from enum import IntEnum
+from enum import Enum
 
 from pydantic import BaseModel
 
 
-class TransactionType(IntEnum):
+class TransactionType(Enum):
     """Типы транзакций."""
 
-    withdrawal = 1
-    deposit = 2
+    withdrawal = 'withdrawal'
+    deposit = 'deposit'
 
 
 class Transaction(BaseModel):

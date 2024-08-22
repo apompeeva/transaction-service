@@ -9,7 +9,7 @@ transaction_router = APIRouter()
 @transaction_router.post('/create_transaction', status_code=status.HTTP_200_OK)
 async def create_transaction(transaction: Transaction):
     """Создание транзакции."""
-    transaction_result = TransactionService.create_transaction(
+    transaction_result = await TransactionService.create_transaction(
         transaction.user_id, transaction.transaction_sum, transaction.transaction_type,
     )
     if transaction_result is None:
@@ -22,7 +22,7 @@ async def create_transaction(transaction: Transaction):
 @transaction_router.post('/get_report', status_code=status.HTTP_200_OK)
 async def get_report(report_data: ReportData):
     """Получение отчета о транзакциях за период."""
-    return TransactionService.get_transaction(
+    return await TransactionService.get_transaction(
         report_data.user_id,
         report_data.start_date,
         report_data.end_date,
@@ -31,4 +31,5 @@ async def get_report(report_data: ReportData):
 
 @transaction_router.get('/healthz/ready', status_code=status.HTTP_200_OK)
 async def health_check():
+    """Прорверка работоспособности сервиса."""
     pass

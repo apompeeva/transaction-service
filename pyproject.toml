@@ -17,6 +17,12 @@ uvicorn = "^0.30.3"
 pytest-asyncio = "^0.23.8"
 anyio = "^4.4.0"
 asyncio = "^3.4.3"
+alembic = "^1.13.2"
+asyncpg = "^0.29.0"
+sqlalchemy = "^2.0.32"
+psycopg = "^3.2.1"
+psycopg-binary = "^3.2.1"
+pytz = "^2024.1"
 
 [tool.poetry.group.dev.dependencies]
 wemake-python-styleguide = "^0.19.2"
