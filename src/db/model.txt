@@ -1,0 +1,32 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+
+Table users {
+  id bigserial [primary key]
+  login varchar
+  password varchar
+  balance bigint
+  verified bool
+}
+
+Table transactions {
+  id bigserial [primary key]
+  user_id bigint
+  type varchar
+  amount bigint
+  created_at timestamp
+}
+
+Table face_vectors {
+  id bigserial
+  user_id bigint
+  embedding varchar(1000)
+  path_to_image varchar
+  creation_time timestamp
+}
+
+Ref: transactions.user_id > users.id
+Ref: face_vectors.user_id - users.id
+
+
