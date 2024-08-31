@@ -15,5 +15,5 @@ EXPOSE 8002
 
 COPY ./alembic.ini  .
 COPY ./src/migration ./src/migration
-COPY ./wait_for_auth.py .
 
+ENTRYPOINT [ "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8002" ]
