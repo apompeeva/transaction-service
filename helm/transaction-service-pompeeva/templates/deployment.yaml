@@ -67,6 +67,10 @@ spec:
               secretKeyRef:
                 name: transaction-service-pompeeva-secret
                 key: db_pass
+          - name: JAEGER_AGENT_HOST
+            value: "infra-jaeger-agent"
+          - name: JAEGER_AGENT_PORT
+            value: "6831"
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

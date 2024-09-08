@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: aipompeeva/transaction-service-shift
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
@@ -68,7 +68,7 @@ resources:
     cpu: 200m
     memory: 256Mi
   requests:
-    cpu: 100m
+    cpu: 50m
     memory: 256Mi
 
 readinessProbe:

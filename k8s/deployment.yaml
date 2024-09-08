@@ -18,7 +18,7 @@ spec:
       - name: transaction-service-pompeeva
         image: aipompeeva/transaction-service-shift:latest
         ports:
-        - containerPort: 8001
+        - containerPort: 8002
         env:
           - name: DB_HOST_POMPEEVA
             valueFrom:
