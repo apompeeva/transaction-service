@@ -25,6 +25,8 @@ psycopg-binary = "^3.2.1"
 pytz = "^2024.1"
 types-pytz = "^2024.1.0.20240417"
 jaeger-client = "^4.8.0"
+aioredis = "^2.0.1"
+redis = "^5.0.8"
 
 [tool.poetry.group.dev.dependencies]
 wemake-python-styleguide = "^0.19.2"

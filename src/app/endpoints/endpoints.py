@@ -1,8 +1,10 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 from opentracing import global_tracer
 
 from app.core.service import TransactionService
 from app.schemas.schemas import ReportData, Transaction
+from redis import Redis
+from app.redis import get_redis
 
 transaction_router = APIRouter()
 
@@ -25,7 +27,7 @@ async def create_transaction(transaction: Transaction):
 
 
 @transaction_router.post('/get_report', status_code=status.HTTP_200_OK)
-async def get_report(report_data: ReportData):
+async def get_report(report_data: ReportData, redis: Redis = Depends(get_redis)):
     """Получение отчета о транзакциях за период."""
     with global_tracer().start_active_span('get_report') as scope:
         scope.span.set_tag('user_id', report_data.user_id)
@@ -33,6 +35,7 @@ async def get_report(report_data: ReportData):
             report_data.user_id,
             report_data.start_date,
             report_data.end_date,
+            redis,
         )
 
 

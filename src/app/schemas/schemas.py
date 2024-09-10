@@ -27,6 +27,9 @@ class TransactionGet(Transaction):
     transaction_type: TransactionType
     creation_time: datetime
 
+    class Config:
+        orm_mode = True
+
 
 class ReportData(BaseModel):
     """Данные для получения отчета о транзакциях за период."""

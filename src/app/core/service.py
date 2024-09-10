@@ -1,16 +1,23 @@
 from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
 from enum import Enum
-
+from redis import Redis
+from fastapi.encoders import jsonable_encoder
+import json
+import logging
 import pytz
 
 from app.core.user_storage import UserStorage
+from app.schemas.schemas import TransactionGet
 from app.crud.transactions_crud import (
     create_new_transaction,
     get_transaction_for_period,
     get_user_by_id,
     update_user_balance
 )
+
+logging.basicConfig()
+logging.getLogger().setLevel(logging.DEBUG)
 
 
 class TransactionType(Enum):
@@ -90,13 +97,24 @@ class TransactionService:
 
     @classmethod
     async def get_transaction(
-        cls, user_id: int, start_date: datetime, end_date: datetime,
+        cls, user_id: int, start_date: datetime, end_date: datetime, redis: Redis
     ) -> list[Transaction]:
         """Получить транзакцию."""
-        report = await get_transaction_for_period(
-            user_id,
-            start_date.astimezone(pytz.UTC),
-            end_date.astimezone(pytz.UTC),
-        )
-        cls.reports.append(report)
+        key = f'{user_id}:{start_date}:{end_date}'
+        serialized_report = redis.get(key)
+        if serialized_report is None:
+            logging.debug(f'Report from postgres')
+            report = await get_transaction_for_period(
+                user_id,
+                start_date.astimezone(pytz.UTC),
+                end_date.astimezone(pytz.UTC),
+            )
+            cls.reports.append(report)
+            serialized_report = json.dumps(
+                [jsonable_encoder(transaction) for transaction in report])
+            redis.set(key, serialized_report, ex=3600)
+        else:
+            logging.debug(f'Report from redis')
+            report = [transaction
+                      for transaction in json.loads(serialized_report)]
         return report
