@@ -4,8 +4,11 @@ from redis import Redis
 
 async def get_redis_pool():
     """Функция для создания пула подключений к Redis."""
-    redis = Redis.from_url('redis://redis-1:6379/2',
-                           encoding="utf8", decode_responses=True)
+    redis = Redis.from_url(
+        'redis://redis-1:6379/2',
+        encoding='utf8',
+        decode_responses=True,
+    )
     try:
         yield redis
     finally:

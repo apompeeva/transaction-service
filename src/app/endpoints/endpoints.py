@@ -1,10 +1,10 @@
-from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from opentracing import global_tracer
+from redis import Redis
 
 from app.core.service import TransactionService
-from app.schemas.schemas import ReportData, Transaction
-from redis import Redis
 from app.redis import get_redis
+from app.schemas.schemas import ReportData, Transaction
 
 transaction_router = APIRouter()
 

@@ -27,7 +27,7 @@ class TransactionGet(Transaction):
     transaction_type: TransactionType
     creation_time: datetime
 
-    class Config:
+    class Config:  # noqa: D106
         orm_mode = True
 
 
